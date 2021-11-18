@@ -11,10 +11,12 @@ const sectionClass = ['section'];
 function App() {
   const [contacts, setContacts] = useState([
     { id: 'id-1', name: 'Alesia Zuk', number: '459-12-56' },
-    { id: 'id-2', name: 'Ilona ', number: '443-89-12' },
-    { id: 'id-3', name: 'Vladislav', number: '645-17-79' },
-    { id: 'id-4', name: 'Artiom', number: '227-91-26' },
-    { id: 'id-5', name: 'Aleksandr', number: '645-17-79' },
+    { id: 'id-2', name: 'Ilona Myroniuk ', number: '443-89-12' },
+    { id: 'id-3', name: 'Vladislav Apelhants', number: '645-17-79' },
+    { id: 'id-4', name: 'Artiom Bilodid', number: '227-91-26' },
+    { id: 'id-5', name: 'Aleksandr Korniiets', number: '645-17-79' },
+    { id: 'id-6', name: 'Roman Ilienko ', number: '443-89-12' },
+    { id: 'id-7', name: 'Tatyana Tuluk ', number: '443-89-12' },
   ]);
 
   const [filter, setFilter] = useState('');
