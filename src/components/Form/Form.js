@@ -1,73 +1,72 @@
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import { useState } from 'react';
 
 import s from './Form.module.css';
 
-class Form extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+function Form({ handleAddContact }) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
+
+    handleAddContact({ name, number });
+    setName('');
+    setNumber('');
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
+  const handleChange = e => {
+    switch (e.target.name) {
+      case 'name':
+        setName(e.target.value);
+        break;
 
-    this.setState({ [name]: value });
+      case 'number':
+        setNumber(e.target.value);
+        break;
+
+      default:
+        break;
+    }
   };
 
-  handleAddContact = () => {
-    const { name, number } = this.state;
+  return (
+    <form onSubmit={handleSubmit}>
+      <label className={s.form_label}>
+        Name:
+        <input
+          className={s.form_input}
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleChange}
+          placeholder="Name Lastname"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+          required
+        />
+      </label>
 
-    this.props.handleAddContact({ name, number });
-  };
+      <label className={s.form_label}>
+        Number
+        <input
+          className={s.form_input}
+          type="tel"
+          name="number"
+          value={number}
+          onChange={handleChange}
+          placeholder="Phone number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+          required
+        />
+      </label>
 
-  render() {
-    const { name, number } = this.state;
-
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label className={s.form_label}>
-          Name:
-          <input
-            className={s.form_input}
-            type="text"
-            name="name"
-            value={name}
-            onChange={this.handleChange}
-            placeholder="Name Lastname"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            required
-          />
-        </label>
-        <label className={s.form_label}>
-          Number
-          <input
-            className={s.form_input}
-            type="tel"
-            name="number"
-            value={number}
-            onChange={this.handleChange}
-            placeholder="Phone number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-            required
-          />
-        </label>
-        <button
-          className={s.form_button}
-          type="submit"
-          onClick={this.handleAddContact}
-        >
-          Add contact
-        </button>
-      </form>
-    );
-  }
+      <button className={s.form_button} type="submit">
+        Add contact
+      </button>
+    </form>
+  );
 }
 
 Form.propTypes = {

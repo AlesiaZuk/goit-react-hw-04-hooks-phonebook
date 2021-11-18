@@ -25,8 +25,8 @@ function Contacts({ filterContacts, handleDeleteContact }) {
 }
 
 Contacts.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  filter: PropTypes.string.isRequired,
+  contacts: PropTypes.array,
+  filter: PropTypes.string,
   handleDeleteContact: PropTypes.func.isRequired,
 };
 export default Contacts;
